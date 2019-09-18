@@ -12,6 +12,20 @@ if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss())
 
 module.exports = {
   siteName: 'On the Rocks',
+  plugins: [
+    {
+      use: '@gridsome/source-graphql',
+      options: {
+        url: process.env.CRAFT_API_URL,
+        fieldName: 'craft',
+        typeName: 'craft',
+
+        headers: {
+          Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+        },
+      },
+    },
+  ],
   css: {
     loaderOptions: {
       postcss: {
